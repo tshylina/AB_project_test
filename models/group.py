@@ -5,4 +5,4 @@ class Group:
         self.footer = footer
 
     def __str__(self):
-        pass
+        return "Group: " + self.name
