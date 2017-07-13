@@ -1,6 +1,6 @@
 import pytest
 from adressbookapi import AddressBook
-
+from models.group import Group
 
 @pytest.fixture(scope ="session")
 def app():
@@ -15,3 +15,8 @@ def init_login(app):
         app.login("admin", "secret")
     yield
     # app.Logout()
+
+@pytest.fixture()
+def init_groups(app):
+    if not app.is_groups_present():
+        app.create_new_group(Group(name="Test"))
