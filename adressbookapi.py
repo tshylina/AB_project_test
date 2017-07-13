@@ -51,11 +51,11 @@ class AddressBook:
     def return_to_group_page(self):
         self.wd.find_element_by_css_selector(".admin > a:nth-child(1)").click()
 
-    def delete_first_group(self):
+    def delete_group(self, index):
         wd = self.wd
         checkboxes = wd.find_elements_by_name("selected[]")
-        if not checkboxes[0].is_selected():
-            checkboxes[0].click()
+        if not checkboxes[index].is_selected():
+            checkboxes[index].click()
         wd.find_element_by_css_selector("#content > form:nth-child(2) > input:nth-child(2)").click()
 
     def Logout(self):
@@ -74,3 +74,8 @@ class AddressBook:
     def is_groups_present(self):
         self.open_group_page()
         return self.is_element_present(By.NAME, "selected[]")
+
+
+    def group_count(self):
+        self.open_group_page()
+        return len(self.wd.find_elements_by_name("selected[]"))
