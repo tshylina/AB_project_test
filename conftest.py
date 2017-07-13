@@ -20,3 +20,12 @@ def init_login(app):
 def init_groups(app):
     if not app.is_groups_present():
         app.create_new_group(Group(name="Test"))
+
+groups = [
+    Group("TEST170710_1","comment170710_1",  "test170710"),
+    Group("TEST"),
+]
+
+@pytest.fixture(params=groups, ids=[str(g) for g in groups])
+def group (request):
+    return request.param
