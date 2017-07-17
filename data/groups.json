@@ -1,0 +1,14 @@
+[
+  {"name": "Новая группа",
+  "header": "test_header",
+  "footer": "test_footer"
+  },
+  {"name": "",
+  "header": "",
+  "footer": ""
+  },
+  {"name": "123*",
+  "header": "test_header+%^&",
+  "footer": "test_footer_#$%"
+  }
+]
