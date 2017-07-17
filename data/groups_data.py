@@ -2,8 +2,7 @@ import json
 from models.group import Group
 
 with open("groups.json", encoding='utf8') as f:
-    group_data = json.load(f)
-    groups_list = [Group(**data) for data in group_data]
+    groups_list = [Group(**data) for data in json.load(f)]
 
     # groups_list = []
     # for data in group_data:
