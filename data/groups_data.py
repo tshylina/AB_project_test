@@ -1,5 +1,10 @@
 import json
 from models.group import Group
+import os.path
+
+file_name = os.path.join(os.path.dirname(os.path.abspath(__file__)), "groups.json")
+
+print(file_name)
 
 with open("groups.json", encoding='utf8') as f:
     groups_list = [Group(**data) for data in json.load(f)]
