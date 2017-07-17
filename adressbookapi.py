@@ -2,9 +2,10 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 class AddressBook:
-    def __init__(self):
-        self.wd = webdriver.Firefox()
+    def __init__(self, driver, base_url):
+        self.wd = driver
         self.wd.implicitly_wait(10)
+        self.base_url = base_url
 
     def create_new_group(self, group):
         # Create
@@ -41,7 +42,7 @@ class AddressBook:
         wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
 
     def open_main_page(self):
-        self.wd.get("http://localhost/addressbook/")
+        self.wd.get(self.base_url)
 
     def message(self):
         el = self.wd.find_element_by_css_selector(".msgbox")
