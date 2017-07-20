@@ -1,9 +1,12 @@
-import pytest
 import json
 import os.path
-from adressbookapi import AddressBook
-from models.group import Group
+
+import pytest
+
 from data.groups_data import groups_list
+from models.group import Group
+from web_api.adressbookapi import AddressBook
+
 
 def pytest_addoption(parser):
     parser.addoption("--config", action="store", default="config.json")
@@ -25,15 +28,15 @@ def app(selenium, config):
 
 @pytest.fixture()
 def init_login(app,config):
-    if not app.is_logged():
-        app.login(config["username"], config["password"])
+    if not app.session.is_logged():
+        app.session.login(config["username"], config["password"])
     yield
-    # app.Logout()
+    app.session.Logout()
 
 @pytest.fixture()
 def init_groups(app):
-    if not app.is_groups_present():
-        app.create_new_group(Group(name="Test"))
+    if not app.group.is_present():
+        app.group.create(Group(name="Test"))
 
 @pytest.fixture(params=groups_list, ids=[str(g) for g in groups_list])
 def group (request):
