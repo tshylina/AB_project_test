@@ -10,3 +10,19 @@ class Group:
 
     def __repr__(self):
         return "<Group: id {}, {}, {}, {}>".format(self.id, self.name, self.header, self.footer)
+
+    def __lt__(self, other):
+        if self.id is None:
+            return False
+        elif other.id is None:
+            return True
+        return self.id < other.id
+
+    def __gt__(self,other):
+        return self.id > other.id
+
+    def __eq__(self, other):
+        result = (self.name == other.name and self.header == other.header and self.footer == other.footer)
+        if self.id is None or other.id is None:
+            return result
+        return result and self.id == other.id

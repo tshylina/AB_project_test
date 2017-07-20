@@ -11,7 +11,7 @@ class AddressbookDB:
             cursor.execute(sql)
             result = []
             for row in cursor:
-                result.append(Group(id=row["group_id"], name=row["group_name"], header=["group_header"], footer=["group_footer"]))
+                result.append(Group(id=row["group_id"], name=row["group_name"], header=row["group_header"], footer=row["group_footer"]))
         self.connection.commit()
         return result
 

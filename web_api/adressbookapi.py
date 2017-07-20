@@ -6,7 +6,7 @@ from web_api.session_helper import SessionHelper
 class AddressBook:
     def __init__(self, driver, base_url):
         self.wd = driver
-        self.wd.implicitly_wait(10)
+        self.wd.implicitly_wait(1)
         self.base_url = base_url
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
