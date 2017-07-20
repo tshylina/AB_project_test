@@ -6,7 +6,7 @@ import pytest
 from data.groups_data import groups_list
 from models.group import Group
 from web_api.adressbookapi import AddressBook
-
+from db_api.adressbook_db import AddressbookDB
 
 def pytest_addoption(parser):
     parser.addoption("--config", action="store", default="config.json")
@@ -21,15 +21,21 @@ def config(request):
 
 @pytest.fixture()
 def app(selenium, config):
-    app = AddressBook(selenium, base_url=config["base_url"])
+    app = AddressBook(selenium, base_url=config["web"]["base_url"])
     app.open_main_page()
     yield app
     app.destroy()
 
+@pytest.fixture(scope="session")
+def db(config):
+    dbfixture = AddressbookDB(**config["db"])
+    yield  dbfixture
+    dbfixture.close()
+
 @pytest.fixture()
 def init_login(app,config):
     if not app.session.is_logged():
-        app.session.login(config["username"], config["password"])
+        app.session.login(config["web"]["username"], config["web"]["password"])
     yield
     app.session.Logout()
 
@@ -37,8 +43,9 @@ def init_login(app,config):
 def init_groups(app):
     if not app.group.is_present():
         app.group.create(Group(name="Test"))
-
-@pytest.fixture(params=groups_list, ids=[str(g) for g in groups_list])
+# TODO: del 0:1
+@pytest.fixture(params=groups_list[0:1], ids=[str(g) for g in groups_list[0:1]])
 def group (request):
     return request.param
+
 

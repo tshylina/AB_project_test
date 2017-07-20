@@ -1,12 +1,15 @@
 from models.group import Group
 
 
-def test_group_create(app, init_login, group):
+def test_group_create(app, init_login, group, db):
+    old_group_list=db.get_group_list()
     app.open_group_page()
     app.group.create(group)
     # Verify group page
     assert "A new group has been entered into the address book." in app.message()
     app.return_to_group_page()
+    new_group_list = db.get_group_list()
+    assert len (old_group_list) +1 == len (new_group_list)
 
 
 
