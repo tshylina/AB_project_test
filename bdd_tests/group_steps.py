@@ -24,4 +24,4 @@ def verify_group_create(db, old_group_list, new_group):
     assert sorted(old_group_list) == sorted(new_group_list)
 
 
-@given
+# @given

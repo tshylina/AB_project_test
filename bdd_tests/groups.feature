@@ -13,5 +13,5 @@ Feature: Contact group CRUD
        | 123%^&*    | 456^&*(    | )(*!98 |
        | новаЯ груп | ПРОЛПО лдл | ДШРТои |
 
-    Scenario:
+
 
